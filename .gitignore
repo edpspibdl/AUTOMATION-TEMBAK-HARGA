@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables & secrets (PENTING: Jangan upload password/kredensial)
+.env
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs
+log/
+*.log
+
+# Editor & OS files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
