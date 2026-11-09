@@ -36,7 +36,7 @@ def is_admin():
     except Exception:
         return False
 
-def main():
+def main(interactive=True):
     logger = setup_logger()
     print("="*60)
     logger.info("=== START AUTOMATION SYSTEM INDOGROSIR ===")
@@ -65,11 +65,13 @@ def main():
     except Exception as e:
         logger.critical(f"❌ CRITICAL ERROR: {e}", exc_info=True)
     
-    input("\nTekan ENTER untuk keluar...")
+    if interactive:
+        input("\nTekan ENTER untuk keluar...")
 
 if __name__ == "__main__":
+    is_auto = "--auto" in sys.argv
     if is_admin():
-        main()
+        main(interactive=not is_auto)
     else:
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
         sys.exit()

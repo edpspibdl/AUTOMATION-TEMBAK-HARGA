@@ -3,4 +3,6 @@ pandas
 openpyxl
 psutil
 python-dotenv
+pystray
+Pillow
 

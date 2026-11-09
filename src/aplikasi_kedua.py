@@ -254,17 +254,27 @@ def jalankan_semua_tahap_indogrosir():
     logger.info("☕ Aplikasi Kasir ditutup. Jeda 4 detik sebelum membuka kembali untuk SPI...")
     time.sleep(4)
 
-    # Tahap 3: Buka Kembali Aplikasi & Update ke SPI (Tombol 'BtnSPI' / 'SEND TO SPI')
-    sukses_spi = proses_tahap(
+    # Tahap 3: Buka Kembali Aplikasi & Update ke SPI (Tombol 'BtnSPI' / 'SEND TO SPI') - Dijalankan 2 kali
+    sukses_spi_1 = proses_tahap(
         btn_auto_id="BtnSPI",
         candidate_titles=["SEND TO SPI", "SPI"],
-        label_tahap="TAHAP 3: SINKRONISASI HARGA KE SPI (SEND TO SPI)"
+        label_tahap="TAHAP 3 (1/2): SINKRONISASI HARGA KE SPI (SEND TO SPI - PERTAMA)"
+    )
+
+    logger.info("☕ Jeda 4 detik sebelum pengulangan push ke SPI kedua...")
+    time.sleep(4)
+
+    sukses_spi_2 = proses_tahap(
+        btn_auto_id="BtnSPI",
+        candidate_titles=["SEND TO SPI", "SPI"],
+        label_tahap="TAHAP 3 (2/2): SINKRONISASI HARGA KE SPI (SEND TO SPI - KEDUA)"
     )
 
     total_durasi = round((time.time() - start_all) / 60, 2)
     print("\n" + "="*60)
     logger.info("🏆 SEMUA TAHAP SINKRONISASI INDOGROSIR SELESAI!")
     logger.info(f"⏱️  Total Durasi: {total_durasi} menit")
-    logger.info(f"   • Sinkronisasi POS Kasir : {'✅ Berhasil' if sukses_pos else '❌ Gagal'}")
-    logger.info(f"   • Sinkronisasi SPI       : {'✅ Berhasil' if sukses_spi else '❌ Gagal'}")
+    logger.info(f"   • Sinkronisasi POS Kasir   : {'✅ Berhasil' if sukses_pos else '❌ Gagal'}")
+    logger.info(f"   • Sinkronisasi SPI (Ke-1)  : {'✅ Berhasil' if sukses_spi_1 else '❌ Gagal'}")
+    logger.info(f"   • Sinkronisasi SPI (Ke-2)  : {'✅ Berhasil' if sukses_spi_2 else '❌ Gagal'}")
     print("="*60)
